@@ -10,11 +10,15 @@ public class GL_GameManager : MonoBehaviour
     public int CurrentP1Score = 0;
     public int CurrentP2Score = 0;
 
+    public int CurrentPlayerPlaying = 0;
+
     public GL_LevelManager CurrentLevelManager;
 
     private int _currentSceneIndex = 0;
 
     private List<string> _levelList = new List<string>();
+
+    public bool IsMultiplayer = false;
 
 
     private void Awake()
@@ -42,5 +46,13 @@ public class GL_GameManager : MonoBehaviour
     public void ChangeLevel()
     {
         SceneManager.LoadScene(_levelList[_currentSceneIndex++]);
+    }
+
+    public void SwitchPlayer()
+    {
+        if (CurrentPlayerPlaying == 0)
+            CurrentPlayerPlaying = 1;
+        else
+            CurrentPlayerPlaying = 0;
     }
 }

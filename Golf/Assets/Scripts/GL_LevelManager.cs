@@ -20,11 +20,18 @@ public class GL_LevelManager : MonoBehaviour
     private GL_PlayerInfo _player1 = null;
     private GL_PlayerInfo _player2 = null;
 
+    private bool _p1HasEnded = false;
+    private bool _p2HasEnded = false;
+
     // Start is called before the first frame update
     void Start()
     {
         _player1 = GameObject.Find("Player1").GetComponent<GL_PlayerInfo>();
-        _player2 = GameObject.Find("Player2").GetComponent<GL_PlayerInfo>();
+
+        if (GL_GameManager.Instance.IsMultiplayer)
+            _player2 = GameObject.Find("Player2").GetComponent<GL_PlayerInfo>();
+        else
+            Destroy(GameObject.Find("Player2"));
 
         GL_GameManager.Instance.CurrentLevelManager = this;
     }
@@ -42,10 +49,22 @@ public class GL_LevelManager : MonoBehaviour
     { _player2 = PlayerToSet; }
 
     public void SetPlayer1Score(int ScoreToSet)
-    { _p1Score = ScoreToSet; }
+    { 
+        _p1Score = ScoreToSet; 
+        if (_p1Score == 20)
+        {
+            _p1HasEnded = true;
+        }
+    }
 
     public void SetPlayer2Score(int ScoreToSet)
-    { _p2Score = ScoreToSet; }
+    { 
+        _p2Score = ScoreToSet;
+        if (_p2Score == 20)
+        {
+            _p2HasEnded = true;
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,6 +74,7 @@ public class GL_LevelManager : MonoBehaviour
             {
                 _p1Score = _player1.GetShot();
                 GL_GameManager.Instance.AddP1Score(_p1Score);
+                _p1HasEnded = true;
             }
 
             else if (collision.transform.gameObject == _player2.gameObject)
