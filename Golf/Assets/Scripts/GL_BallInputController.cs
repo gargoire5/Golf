@@ -18,6 +18,8 @@ public class GL_BallInputController : MonoBehaviour
     public InputActionReference aimAction;
     public InputActionReference shootAction;
 
+    private GL_PlayerInfo _playerInfo;
+
     public void Awake()
     {
         shootAction.action.started += ctx => StartAiming();
@@ -30,6 +32,8 @@ public class GL_BallInputController : MonoBehaviour
     {
         rb.GetComponent<Rigidbody>();
         aimCurrent = Vector2.zero;
+
+        _playerInfo = GetComponent<GL_PlayerInfo>();
     }
 
     private void OnEnable()
@@ -67,6 +71,8 @@ public class GL_BallInputController : MonoBehaviour
 
         aimLine.SetPosition(0, Vector3.zero);
         aimLine.SetPosition(1, Vector3.zero);
+
+        _playerInfo.Shoot();
     }
 
     private void StartAiming()
