@@ -200,6 +200,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6906097605181814976, guid: 45030d561c85f554c8eb0ff4fbbe68e5, type: 3}
+      propertyPath: IsMultiplayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7129617197198581346, guid: 45030d561c85f554c8eb0ff4fbbe68e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -253,13 +257,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4293517119578188398, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5400550257464847587, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 6286724109847969560, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.0488586
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: 6286724109847969560, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_LocalPosition.y
@@ -267,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6286724109847969560, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 56.956146
+      value: 44.1
       objectReference: {fileID: 0}
     - target: {fileID: 6286724109847969560, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_LocalRotation.w
@@ -296,6 +304,10 @@ PrefabInstance:
     - target: {fileID: 6286724109847969560, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875807247294417733, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
+      propertyPath: multiplierForce
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -357,6 +369,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ad0eb6f1428faeb4d9f4abc3eb40cd9a, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: ad0eb6f1428faeb4d9f4abc3eb40cd9a, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ad0eb6f1428faeb4d9f4abc3eb40cd9a, type: 3}
       propertyPath: m_Name

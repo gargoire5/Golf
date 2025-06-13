@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
 using Cinemachine;
+using System.Net.NetworkInformation;
 
 public class GL_BallInputController : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class GL_BallInputController : MonoBehaviour
     public InputActionReference shootAction;
 
     private GL_PlayerInfo _playerInfo;
+
+    private bool _isGrounded = false;
 
     public void Awake()
     {
@@ -81,6 +84,11 @@ public class GL_BallInputController : MonoBehaviour
             Vector3 worlDir = new Vector3(-dir.x, 0, -dir.y).normalized;
             aimLine.SetPosition(0, transform.position);
             aimLine.SetPosition(1, transform.position + worlDir * Math.Clamp(dir.magnitude * multiplierForce / 10f, 0, maxForce * multiplierForce));
+        }
+
+        if (_isGrounded == false)
+        {
+            rb.AddForce(0, -1, 0, ForceMode.Impulse);
         }
     }
 
@@ -150,6 +158,22 @@ public class GL_BallInputController : MonoBehaviour
         if (other.transform.tag == "Boost")
         {
             other.gameObject.GetComponent<GL_Boost>().RemoveRigidbody(rb);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Floor")
+        {
+            _isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag == "Floor")
+        {
+            _isGrounded = false;
         }
     }
 }
