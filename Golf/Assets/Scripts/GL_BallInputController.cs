@@ -10,7 +10,7 @@ public class GL_BallInputController : MonoBehaviour
     [SerializeField]
     public float maxForce = 20f;
     public LineRenderer aimLine;
-    public CinemachineVirtualCamera camera;
+    public CinemachineInputProvider CinemachineInputProvider;
 
     public Rigidbody rb;
     public Vector2 aimStart;
@@ -39,13 +39,10 @@ public class GL_BallInputController : MonoBehaviour
         aimAction.action.performed += ctx => aimCurrent = ctx.ReadValue<Vector2>();
     }
 
-
     void Start()
     {
         rb.GetComponent<Rigidbody>();
         aimCurrent = target.transform.forward;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
     }
 
     private void OnEnable()
@@ -63,7 +60,6 @@ public class GL_BallInputController : MonoBehaviour
 
     void Update()
     {
-      
 
         if (isAiming && rb.velocity.magnitude < 0.1f) 
         {
@@ -74,7 +70,6 @@ public class GL_BallInputController : MonoBehaviour
             aimLine.SetPosition(1, transform.position + worlDir * Math.Clamp(dir.magnitude / 10f, 0, maxForce));
         }
     }
-
 
 
     private void ShootBall()
@@ -88,6 +83,11 @@ public class GL_BallInputController : MonoBehaviour
 
         aimLine.SetPosition(0, Vector3.zero);
         aimLine.SetPosition(1, Vector3.zero);
+
+        if (CinemachineInputProvider != null)
+        {
+            CinemachineInputProvider.enabled = true;
+        }
     }
 
     private void StartAiming()
@@ -97,6 +97,11 @@ public class GL_BallInputController : MonoBehaviour
             isAiming = true;
             
             aimStart = Mouse.current.position.ReadValue();
+
+            if (CinemachineInputProvider != null)
+            {
+                CinemachineInputProvider.enabled = false;
+            }
         }
         
     }

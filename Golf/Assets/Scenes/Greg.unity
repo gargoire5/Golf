@@ -699,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxForce: 30
   aimLine: {fileID: 6584524070481514332}
-  camera: {fileID: 360057836}
+  CinemachineInputProvider: {fileID: 360057838}
   rb: {fileID: 4784785325566022518}
   aimStart: {x: 0, y: 0}
   aimCurrent: {x: 0, y: 0}
