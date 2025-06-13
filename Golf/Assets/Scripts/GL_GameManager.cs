@@ -31,6 +31,10 @@ public class GL_GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _levelList.Add("Map1");
+        _levelList.Add("Map2");
+        _levelList.Add("Map3");
     }
 
     public void AddP1Score(int ScoreToAdd)
@@ -51,8 +55,14 @@ public class GL_GameManager : MonoBehaviour
     public void SwitchPlayer()
     {
         if (CurrentPlayerPlaying == 0)
+        {
             CurrentPlayerPlaying = 1;
+        }
         else
+        {
             CurrentPlayerPlaying = 0;
+        }
+
+        CurrentLevelManager.SwitchPlayer(CurrentPlayerPlaying);
     }
 }
