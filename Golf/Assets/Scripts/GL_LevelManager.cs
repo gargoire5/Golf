@@ -26,10 +26,10 @@ public class GL_LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player1 = GameObject.Find("Player1").GetComponent<GL_PlayerInfo>();
+        _player1 = GameObject.Find("Player1").GetComponentInChildren<GL_PlayerInfo>();
 
         if (GL_GameManager.Instance.IsMultiplayer)
-            _player2 = GameObject.Find("Player2").GetComponent<GL_PlayerInfo>();
+            _player2 = GameObject.Find("Player2").GetComponentInChildren<GL_PlayerInfo>();
         else
             Destroy(GameObject.Find("Player2"));
 

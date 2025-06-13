@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8875807247294417733}
   - component: {fileID: 6047276869352704892}
   - component: {fileID: 5338599215488131543}
+  - component: {fileID: 2888203500262523008}
   m_Layer: 0
   m_Name: Ball
   m_TagString: PlayerBall
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2786980020670355090}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2202272, y: -2.0533442, z: 1.40243}
+  m_LocalPosition: {x: -1.2202272, y: -2.0533442, z: -117.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -299,6 +300,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2888203500262523008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2786980020670355090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 988ee4f59a9333c45b6f7c32883afcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3416303095819822987
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +510,7 @@ Transform:
   m_GameObject: {fileID: 4572693143234849558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2202272, y: -1.7033443, z: -8.59757}
+  m_LocalPosition: {x: -1.2202272, y: -1.7033443, z: -127.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -672,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 9088111049555714124}
   serializedVersion: 2
   m_LocalRotation: {x: -0.31604916, y: -0.08183835, z: 0.027375426, w: -0.94481003}
-  m_LocalPosition: {x: -1.2202272, y: -1.7033443, z: -8.59757}
+  m_LocalPosition: {x: -1.2202272, y: -1.7033443, z: -127.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

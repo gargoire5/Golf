@@ -46,6 +46,8 @@ public class GL_BallInputController : MonoBehaviour
         rb.GetComponent<Rigidbody>();
         _playerInfo = GetComponent<GL_PlayerInfo>();
         aimCurrent = target.transform.forward;
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnEnable()
@@ -79,6 +81,7 @@ public class GL_BallInputController : MonoBehaviour
     {
         if (!isAiming) return;
         isAiming = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         Vector3 dir = (aimCurrent - aimStart);
         Vector3 force = new Vector3(-dir.x, 0, -dir.y).normalized * Math.Clamp(dir.magnitude / 10f, 0, maxForce);
@@ -99,7 +102,8 @@ public class GL_BallInputController : MonoBehaviour
         if (rb.velocity.magnitude < 0.1f)
         {
             isAiming = true;
-            
+
+            Cursor.lockState = CursorLockMode.None;
             aimStart = Mouse.current.position.ReadValue();
 
             if (CinemachineInputProvider != null)
