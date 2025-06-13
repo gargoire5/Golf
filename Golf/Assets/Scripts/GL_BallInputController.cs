@@ -7,8 +7,10 @@ using Cinemachine;
 
 public class GL_BallInputController : MonoBehaviour
 {
+    
+    private float maxForce = 20f;
     [SerializeField]
-    public float maxForce = 20f;
+    public float multiplierForce = 1.0f;
     public LineRenderer aimLine;
     public CinemachineInputProvider CinemachineInputProvider;
 
@@ -67,14 +69,18 @@ public class GL_BallInputController : MonoBehaviour
 
     void Update()
     {
+        if(rb.velocity.magnitude > 0f && rb.velocity.magnitude < 1f)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
 
-        if (isAiming && rb.velocity.magnitude < 0.1f) 
+        if (isAiming && rb.velocity.magnitude < 1f) 
         {
             Vector3 dir = (aimCurrent - aimStart);
             Vector3 worlDir = new Vector3(-dir.x, 0, -dir.y).normalized;
-            
             aimLine.SetPosition(0, transform.position);
-            aimLine.SetPosition(1, transform.position + worlDir * Math.Clamp(dir.magnitude / 10f, 0, maxForce));
+            aimLine.SetPosition(1, transform.position + worlDir * Math.Clamp(dir.magnitude * multiplierForce / 10f, 0, maxForce * multiplierForce));
         }
     }
 
@@ -86,7 +92,7 @@ public class GL_BallInputController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         Vector3 dir = (aimCurrent - aimStart);
-        Vector3 force = new Vector3(-dir.x, 0, -dir.y).normalized * Math.Clamp(dir.magnitude / 10f, 0, maxForce);
+        Vector3 force = new Vector3(-dir.x, 0, -dir.y).normalized * Math.Clamp(dir.magnitude * multiplierForce / 10f, 0, maxForce * multiplierForce);
         rb.AddForce(force, ForceMode.Impulse);
 
         aimLine.SetPosition(0, Vector3.zero);
