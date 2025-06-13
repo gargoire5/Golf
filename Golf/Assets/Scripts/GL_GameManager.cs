@@ -49,7 +49,8 @@ public class GL_GameManager : MonoBehaviour
 
     public void ChangeLevel()
     {
-        SceneManager.LoadScene(_levelList[_currentSceneIndex++]);
+        _currentSceneIndex++;
+        SceneManager.LoadScene(_levelList[_currentSceneIndex],LoadSceneMode.Single);
     }
 
     public void SwitchPlayer()

@@ -17,16 +17,25 @@ public class GL_LevelManager : MonoBehaviour
     private int _p1Score = 0;
     private int _p2Score = 0;
 
+    [SerializeField]
     private GL_PlayerInfo _player1 = null;
+
+    [SerializeField]
     private GL_PlayerInfo _player2 = null;
 
     private bool _p1HasEnded = false;
     private bool _p2HasEnded = false;
 
+    [SerializeField]
+    private Transform _spawn;
+
     // Start is called before the first frame update
     void Start()
     {
         _player1 = GameObject.Find("Player1").GetComponentInChildren<GL_PlayerInfo>();
+        _player1.transform.parent.transform.SetPositionAndRotation(_spawn.position, _spawn.rotation);
+        _player1.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        _player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
         if (GL_GameManager.Instance.IsMultiplayer)
             _player2 = GameObject.Find("Player2").GetComponentInChildren<GL_PlayerInfo>();
@@ -39,7 +48,7 @@ public class GL_LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GL_GameManager.Instance.IsMultiplayer)
+        if (GL_GameManager.Instance.IsMultiplayer == false)
         {
             if (_p1HasEnded)
             {
@@ -94,24 +103,21 @@ public class GL_LevelManager : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Win(int playerID)
     {
-        if (collision.transform.tag == "PlayerBall")
+        if (playerID == 0)
         {
-            if (collision.transform.gameObject == _player1.gameObject)
-            {
-                _p1Score = _player1.GetShot();
-                GL_GameManager.Instance.AddP1Score(_p1Score);
-                _p1HasEnded = true;
-                Debug.Log("Victoire");
-            }
+            _p1Score = _player1.GetShot();
+            GL_GameManager.Instance.AddP1Score(_p1Score);
+            _p1HasEnded = true;
+            Debug.Log("Victoire");
+        }
 
-            else if (collision.transform.gameObject == _player2.gameObject)
-            {
-                _p2Score = _player2.GetShot();
-                GL_GameManager.Instance.AddP1Score(_p2Score);
-                _p2HasEnded = true;
-            }
+        else if (playerID == 1)
+        {
+            _p2Score = _player2.GetShot();
+            GL_GameManager.Instance.AddP1Score(_p2Score);
+            _p2HasEnded = true;
         }
     }
 }

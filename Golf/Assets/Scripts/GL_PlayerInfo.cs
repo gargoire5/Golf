@@ -9,7 +9,7 @@ public class GL_PlayerInfo : MonoBehaviour
 
     private void Start()
     {
-        if (gameObject.name == "Player1")
+        if (gameObject.transform.parent.name == "Player1")
         {
             _playerID = 0;
         }
@@ -35,5 +35,13 @@ public class GL_PlayerInfo : MonoBehaviour
     public int GetShot()
     {
         return _currentShot;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Hole")
+        {
+            GL_GameManager.Instance.CurrentLevelManager.Win(_playerID);
+        }
     }
 }

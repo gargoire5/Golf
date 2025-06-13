@@ -12,7 +12,7 @@ public class GL_BallInputController : MonoBehaviour
     public LineRenderer aimLine;
     public CinemachineInputProvider CinemachineInputProvider;
 
-    public Rigidbody rb;
+    public Rigidbody rb = null;
     public Vector2 aimStart;
     public Vector2 aimCurrent;
     private bool isAiming = false;
@@ -36,6 +36,8 @@ public class GL_BallInputController : MonoBehaviour
 
     public void Awake()
     {
+        DontDestroyOnLoad(gameObject.transform.parent.gameObject);
+
         shootAction.action.started += ctx => StartAiming();
         shootAction.action.canceled += ctx => ShootBall();
         aimAction.action.performed += ctx => aimCurrent = ctx.ReadValue<Vector2>();
@@ -43,7 +45,7 @@ public class GL_BallInputController : MonoBehaviour
 
     void Start()
     {
-        rb.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         _playerInfo = GetComponent<GL_PlayerInfo>();
         aimCurrent = target.transform.forward;
 
@@ -99,16 +101,32 @@ public class GL_BallInputController : MonoBehaviour
 
     private void StartAiming()
     {
-        if (rb.velocity.magnitude < 0.1f)
+        if (rb != null)
         {
-            isAiming = true;
-
-            Cursor.lockState = CursorLockMode.None;
-            aimStart = Mouse.current.position.ReadValue();
-
-            if (CinemachineInputProvider != null)
+            if (rb.velocity.magnitude < 0.1f)
             {
-                CinemachineInputProvider.enabled = false;
+                isAiming = true;
+
+                Cursor.lockState = CursorLockMode.None;
+                aimStart = Mouse.current.position.ReadValue();
+
+                if (CinemachineInputProvider != null)
+                {
+                    CinemachineInputProvider.enabled = false;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Aucun RigidBody detecte");
+            rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Debug.Log("Rigidbody set!");
+            }
+            else
+            {
+                Debug.Log("Aucun RigidBody detecte");
             }
         }
         
