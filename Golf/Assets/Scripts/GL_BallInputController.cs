@@ -129,6 +129,21 @@ public class GL_BallInputController : MonoBehaviour
                 Debug.Log("Aucun RigidBody detecte");
             }
         }
-        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Boost")
+        {
+            other.gameObject.GetComponent<GL_Boost>().AddRigidbody(rb);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Boost")
+        {
+            other.gameObject.GetComponent<GL_Boost>().RemoveRigidbody(rb);
+        }
     }
 }
