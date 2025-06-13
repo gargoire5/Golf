@@ -67,12 +67,16 @@ public class GL_BallInputController : MonoBehaviour
 
     void Update()
     {
+        if(rb.velocity.magnitude > 0f && rb.velocity.magnitude < 1f)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
 
-        if (isAiming && rb.velocity.magnitude < 0.1f) 
+        if (isAiming && rb.velocity.magnitude < 1f) 
         {
             Vector3 dir = (aimCurrent - aimStart);
             Vector3 worlDir = new Vector3(-dir.x, 0, -dir.y).normalized;
-            
             aimLine.SetPosition(0, transform.position);
             aimLine.SetPosition(1, transform.position + worlDir * Math.Clamp(dir.magnitude / 10f, 0, maxForce));
         }
@@ -110,10 +114,13 @@ public class GL_BallInputController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 aimStart = Mouse.current.position.ReadValue();
 
+
                 if (CinemachineInputProvider != null)
                 {
                     CinemachineInputProvider.enabled = false;
                 }
+
+
             }
         }
         else

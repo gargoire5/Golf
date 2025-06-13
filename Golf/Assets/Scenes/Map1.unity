@@ -337,6 +337,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2068638866652266947, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
+      propertyPath: m_VerticalAxis.m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2068638866652266947, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_VerticalAxis.m_AccelTime
       value: 0.5
       objectReference: {fileID: 0}
@@ -363,6 +367,10 @@ PrefabInstance:
     - target: {fileID: 2068638866652266947, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_HorizontalAxis.m_SpeedMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271576272883182696, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
+      propertyPath: m_Drag
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5400550257464847587, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
       propertyPath: m_Name
