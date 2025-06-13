@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: maxForce
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 8875807247294417733, guid: f557c9998f5460c41a99b04cb316c485, type: 3}
+      propertyPath: multiplierForce
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
