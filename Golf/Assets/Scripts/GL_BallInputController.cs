@@ -3,17 +3,31 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
+using Cinemachine;
 
 public class GL_BallInputController : MonoBehaviour
 {
     [SerializeField]
     public float maxForce = 20f;
     public LineRenderer aimLine;
+    public CinemachineInputProvider CinemachineInputProvider;
 
     public Rigidbody rb;
     public Vector2 aimStart;
     public Vector2 aimCurrent;
     private bool isAiming = false;
+
+
+    public Transform target;
+
+    public float sensitivity = 5f;
+    public float maxAngle = 80f;
+    public float minAngle = -30f;
+
+    public Vector2 lookInput;
+
+    private float xRotation = 0f;
+    private float yRotation = 0f;
 
     public InputActionReference aimAction;
     public InputActionReference shootAction;
@@ -27,13 +41,11 @@ public class GL_BallInputController : MonoBehaviour
         aimAction.action.performed += ctx => aimCurrent = ctx.ReadValue<Vector2>();
     }
 
-
     void Start()
     {
         rb.GetComponent<Rigidbody>();
-        aimCurrent = Vector2.zero;
-
         _playerInfo = GetComponent<GL_PlayerInfo>();
+        aimCurrent = target.transform.forward;
     }
 
     private void OnEnable()
@@ -45,11 +57,13 @@ public class GL_BallInputController : MonoBehaviour
     private void OnDisable()
     {
         aimAction.action.Disable();
-        aimAction.action.Disable();
+        shootAction.action.Disable();
+
     }
 
     void Update()
     {
+
         if (isAiming && rb.velocity.magnitude < 0.1f) 
         {
             Vector3 dir = (aimCurrent - aimStart);
@@ -59,6 +73,7 @@ public class GL_BallInputController : MonoBehaviour
             aimLine.SetPosition(1, transform.position + worlDir * Math.Clamp(dir.magnitude / 10f, 0, maxForce));
         }
     }
+
 
     private void ShootBall()
     {
@@ -73,14 +88,25 @@ public class GL_BallInputController : MonoBehaviour
         aimLine.SetPosition(1, Vector3.zero);
 
         _playerInfo.Shoot();
+        if (CinemachineInputProvider != null)
+        {
+            CinemachineInputProvider.enabled = true;
+        }
     }
 
     private void StartAiming()
     {
-        if(rb.velocity.magnitude < 0.1f)
+        if (rb.velocity.magnitude < 0.1f)
         {
             isAiming = true;
+            
             aimStart = Mouse.current.position.ReadValue();
+
+            if (CinemachineInputProvider != null)
+            {
+                CinemachineInputProvider.enabled = false;
+            }
         }
+        
     }
 }
